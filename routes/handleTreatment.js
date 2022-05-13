@@ -29,4 +29,19 @@ router.post("/all", async (req, res) => {
 	})
 })
 
+router.get("/", async (req, res) => {
+	Treatment.find({}, (err, data) => {
+		if (err) {
+			res.status(500).send({
+				message: "there was an server side error",
+				error: {
+					...err,
+				},
+			})
+		} else {
+			res.status(200).send(data)
+		}
+	})
+})
+
 module.exports = router
